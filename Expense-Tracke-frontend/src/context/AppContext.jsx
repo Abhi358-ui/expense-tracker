@@ -119,6 +119,7 @@ const AppContextProvider = ({ children }) => {
                 }
             })
             fetchExpense()
+            fetchIncome()
         } catch (error) {
             console.log(error)
         }

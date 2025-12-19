@@ -138,6 +138,7 @@
 
 import { useContext, useState } from "react"
 import { AppContext } from "../context/AppContext"
+import { toast } from "react-toastify"
 const Expenses = () => {
         const {addExpense} = useContext(AppContext)
 
@@ -155,10 +156,14 @@ const Expenses = () => {
             setFormData({...formData,[name]:value})
         }
 
-        const handleSubmit =(e) =>{
+        const handleSubmit =async (e) =>{
             e.preventDefault()
             const amount = Number(formData.amount)
-            addExpense(formData.title, amount, formData.category, formData.description, formData.date)
+            if (!amount) {
+                toast.error("Invalid amount")
+                return;
+            }
+            await addExpense(formData.title, amount, formData.category, formData.description, formData.date)
         }
     
     return (
